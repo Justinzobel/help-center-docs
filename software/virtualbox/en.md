@@ -1,14 +1,14 @@
 +++
 title = "VirtualBox"
-lastmod = "2017-10-18T06:18:00+03:00"
+lastmod = "2017-11-09T13:40:00+10:30"
 +++
 # VirtualBox
 
 [VirtualBox](https://virtualbox.org) is an x86 virtualization software package developed by Oracle.
 
-## Install kernel headers
+## Solus as Guest
 
-For using VirtualBox in either guest or host mode, it is important that you install the correct headers for your kernel,
+For using VirtualBox in guest mode, it is important that you install the correct headers for your kernel,
 as Solus support both a `current` and `lts` kernel.
 
 If you aren't sure which kernel you
@@ -18,7 +18,7 @@ are running, run the following in terminal:
 uname -r
 ```
 
-You will either have a `.current` or `.lts` suffix. Examples: `4.12.12-19.current` or `4.9.49-46.lts`
+You will either have a `.current` or `.lts` suffix. Examples: `4.13.12-32.current` or `4.9.61-57.lts`
 
 If you have an lts kernel, install the lts headers:
 
@@ -31,10 +31,6 @@ If you have a current kernel, installing the current headers:
 ``` bash
 sudo eopkg install linux-current-headers
 ```
-
-Now proceed for setting up Solus as Guest or Host.
-
-## Solus as Guest
 
 Make sure you have the necessary core packages installed:
 
@@ -91,16 +87,28 @@ Execute these commands to set the permissions and add yourself to the group:
 sudo chmod 755 /media
 sudo usermod -aG vboxsf `whoami`
 ```
+
 ## Solus as Host
 
-Download the latest [VirtualBox Installer](https://www.virtualbox.org/wiki/Linux_Downloads) - [direct link](http://download.virtualbox.org/virtualbox/5.1.30/VirtualBox-5.1.30-118389-Linux_amd64.run) (5.1.30) right click link and Save As.
-Now install the dependencies and VirtualBox like so:
+VirtualBox is available in the Software Center.
+
+Using VirtualBox in host mode also requires that you install the correct version for your kernel,
+as Solus support both a `current` and `lts` kernel.
+
+If you aren't sure which kernel you
+are running, run the following in terminal:
 
 ``` bash
-sudo eopkg it -c system.devel
-sudo sh ~/Downloads/VirtualBox-5.1.30-118389-Linux_amd64.run
+uname -r
 ```
 
-Replace the version number of the file with the one you downloaded.
+You will either have a `.current` or `.lts` suffix. Examples: `4.13.12-32.current` or `4.9.61-57.lts`
 
-**Note:** You will probably want to install the [Extension Pack](https://www.virtualbox.org/wiki/Downloads) to extend the functionalities of VirtualBox.
+If you have an lts kernel, install VirtualBox for the lts kernel:
+
+```sudo eopkg install virtualbox-lts```
+
+If you have a current kernel, install VirtualBox for the current kernel:
+
+``` bash
+sudo eopkg install virtualbox-current```
